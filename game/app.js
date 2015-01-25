@@ -3165,9 +3165,9 @@ var Musicope;
                     xhr.open('GET', path, false);
                     xhr.send();
                     var shader;
-                    if (path.indexOf("fragment.glsl") > 0) {
+                    if (path.indexOf("fragment.glsl") >= 0) {
                         shader = o.gl.createShader(o.gl.FRAGMENT_SHADER);
-                    } else if (path.indexOf("vertex.glsl") > 0) {
+                    } else if (path.indexOf("vertex.glsl") >= 0) {
                         shader = o.gl.createShader(o.gl.VERTEX_SHADER);
                     }
                     o.gl.shaderSource(shader, xhr.responseText);
@@ -3526,4 +3526,3 @@ var Base64;
     Base64.decode = decode;
     ;
 })(Base64 || (Base64 = {}));
-//# sourceMappingURL=app.js.map
