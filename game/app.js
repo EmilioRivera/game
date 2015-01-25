@@ -897,7 +897,7 @@ var Musicope;
                                 this.key = "enter";
                                 this.isDisplayed = false;
                                 var o = this;
-                                $.get("inputs/keyboard/actions/displayHelp/_assets/overlay.html?1").done(function (result) {
+                                $.get("overlay.html?1").done(function (result) {
                                     $(result).appendTo("body");
                                     o.window = $("#displayHelpOverlay");
                                 });
@@ -3122,8 +3122,8 @@ var Musicope;
                 WebGL.prototype.initShaders = function () {
                     var o = this;
 
-                    var vertexShader = o.getShader("scene/_assets/vertex.glsl");
-                    var fragmentShader = o.getShader("scene/_assets/fragment.glsl");
+                    var vertexShader = o.getShader("vertex.glsl");
+                    var fragmentShader = o.getShader("fragment.glsl");
                     var shaderProgram = this.gl.createProgram();
                     this.gl.attachShader(shaderProgram, vertexShader);
                     this.gl.attachShader(shaderProgram, fragmentShader);
