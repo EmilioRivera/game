@@ -53,7 +53,6 @@
     }
 
     export function bindKeyboard() {
-        $('.el:visible:first').addClass('elFocus');
         down();
         up();
         enter();

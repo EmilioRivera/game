@@ -48,6 +48,9 @@ var Musicope;
                 var out = $.Deferred();
                 Musicope.dropbox.readFile(Musicope.params.c_songUrl, { arrayBuffer: true }, function (error, data) {
                     var arr = new Uint8Array(data);
+                    if (error || arr.length == 0) {
+                        throw "error loading midi file";
+                    }
                     out.resolve(arr);
                 });
                 return out.promise();
@@ -2314,6 +2317,7 @@ var Musicope;
                 initScores().done(function () {
                     getAllMidiFiles(client).done(function (items) {
                         populateDOM(items, scores);
+                        $('.el:visible:first').addClass('elFocus');
                         List.Keyboard.bindKeyboard();
                     });
                 });
@@ -2430,7 +2434,6 @@ var Musicope;
             }
             Keyboard.resetIndex = resetIndex;
             function bindKeyboard() {
-                $('.el:visible:first').addClass('elFocus');
                 down();
                 up();
                 enter();

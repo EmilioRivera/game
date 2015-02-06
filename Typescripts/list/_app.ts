@@ -92,6 +92,7 @@
             initScores().done(() => {
                 getAllMidiFiles(client).done((items) => {
                     populateDOM(items, scores);
+                    $('.el:visible:first').addClass('elFocus');
                     Keyboard.bindKeyboard();
                 });
             });
