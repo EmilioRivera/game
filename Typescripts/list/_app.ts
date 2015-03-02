@@ -102,8 +102,13 @@
         $(document).on('click', '.vote-down', voteDown);
 
         $(document).on('click', '.elLink', function () {
-            params.c_songUrl = $(this).siblings('.elURL').text().trim();
-            var c = new Musicope.Game.Controller();
+            var el = $(this).siblings('.elURL');
+            if (el.length > 1) {
+                throw "wtf";
+            }
+            params.c_songUrl = $(el[0]).text().trim();
+            Mousetrap.reset();
+            game = new Musicope.Game.Game();
         });
 
         var lastQuery = "";

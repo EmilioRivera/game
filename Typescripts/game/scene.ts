@@ -14,7 +14,7 @@
         return result;
     }
 
-    export class Scene {
+    export class Scene implements IDisposable {
 
         private pixelsPerTime: number;
         private activeIds = new Int32Array(127);
@@ -34,7 +34,6 @@
             o.setupWebGL();
             o.setupScene();
         }
-
 
         setActiveId(id: number) {
             this.activeIds[id] = 1;
@@ -56,6 +55,10 @@
             var dx = 2 * time / o.song.timePerSong;
             var dy = -time * o.pixelsPerTime / o.canvas.height * 2;
             o.webgl.redraw(dx, dy, o.activeIds);
+        }
+
+        dispose = () => {
+            Params.unsubscribe("scene.Basic");
         }
 
         private subscribeToParamsChange() {
@@ -84,7 +87,7 @@
             var o = this;
             o.canvas.width = window.innerWidth;
             o.canvas.height = window.innerHeight;
-            o.pixelsPerTime = o.canvas.height * 4 / (o.song.noteValuePerBeat * params.s_quartersPerHeight * o.song.timePerBeat);
+            o.pixelsPerTime = o.canvas.height * 4 / (o.song.midi.noteValuePerBeat * params.s_quartersPerHeight * o.song.midi.timePerBeat);
         }
 
         private setupWebGL() {
@@ -113,8 +116,7 @@
                 sustainNotes: o.song.sceneSustainNotes,
                 p_minNote: params.p_minNote,
                 p_maxNote: params.p_maxNote,
-                minPlayedNoteId: o.song.minPlayedNoteId,
-                maxPlayedNoteId: o.song.maxPlayedNoteId
+                playedNoteID: o.song.playedNoteID,
             };
             SceneFns.drawScene(input);
             var bufferData = concat(bag);

@@ -15,7 +15,8 @@
     function enter() {
         Mousetrap.bind('enter',(e) => {
             params.c_songUrl = $('.el').filter('.elFocus').find('.elURL').text().trim();
-            var c = new Musicope.Game.Controller();
+            Mousetrap.reset();
+            game = new Musicope.Game.Game();
             e.preventDefault();
         });
     }
