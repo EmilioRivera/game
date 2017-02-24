@@ -13,6 +13,9 @@ export var mainView;
 export function correctPosition() {
     var ul = $('.list-scroll');
     var li = $(".song-list-el-focus");
+    if (li.length === 0){
+        return true;
+    }
     var rely: number = li.position().top - ul.scrollTop() + 35;
     var drely1 = rely + 1.5 * li.height() - ul.height();
     var drely2 = rely - 0.5 * li.height();
@@ -51,7 +54,7 @@ $(document).ready(() => {
 
     $('.list-block-search').on('search', (a, b, c) => {
         $('.song-list-el-focus').removeClass('song-list-el-focus');
-        $('.list-scroll li:visible:first').addClass('song-list-el-focus');
+        $('.list-scroll li:not(.hidden-by-searchbar)').first().addClass('song-list-el-focus');
         $('.list-scroll').scrollTop(0);
     });
 
